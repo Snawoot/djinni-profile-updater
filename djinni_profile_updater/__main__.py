@@ -25,18 +25,14 @@ from selenium.common.exceptions import (TimeoutException,
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.utils import ChromeType
 
-RESUME_LIST_URL = "https://account.rabota.ua/jobsearch/notepad/cvs"
-RESUME_LIST_URL_PATTERN = r"^https://account\.rabota\.ua/(ua/)?jobsearch/notepad/cvs/?$"
-LOGIN_URL = "https://rabota.ua/jobsearch/login"
-POST_LOGIN_URL_PATTERN = r"^https://account\.rabota\.ua/(ua/)?jobsearch/notepad/vacancies_profile/?$"
-UPDATE_BUTTON_XPATH = "//div[contains(@class, 'cv-item-container')]"\
-    "//button[contains(@data-bind, 'updateDate') and "\
-    "(contains(text(), 'Обновить') or contains(text(), 'Оновити'))]"
-UPDATE_INTERVAL = 30 * 60
-UPDATE_INTERVAL_MIN_DRIFT = 10
-UPDATE_INTERVAL_MAX_DRIFT = 60
+PROFILE_URL = "https://djinni.co/my/profile/"
+LOGIN_URL = "https://djinni.co/login?from=frontpage_main"
+POST_LOGIN_URL = "https://djinni.co/my/inbox/"
+UPDATE_BUTTON_XPATH = "//form[contains(@class, 'js-profile-form')]//input[@type = 'submit']"
+UPDATE_INTERVAL = 24 * 3600
+UPDATE_INTERVAL_MIN_DRIFT = -3600
+UPDATE_INTERVAL_MAX_DRIFT = 3600
 MANUAL_LOGIN_TIMEOUT = 3600
-POST_UPDATE_PAUSE = 30
 
 DB_INIT = [
     "CREATE TABLE IF NOT EXISTS update_ts (\n"
@@ -98,26 +94,30 @@ button_wait_condition = EC.presence_of_element_located((By.XPATH, UPDATE_BUTTON_
 
 def update(browser, timeout):
     logger = logging.getLogger("UPDATE")
-    browser.get(RESUME_LIST_URL)
+    browser.get(PROFILE_URL)
     WebDriverWait(browser, timeout).until(
         button_wait_condition
     )
-    update_buttons = browser.find_elements_by_xpath(UPDATE_BUTTON_XPATH)
-    logger.info("Located %d update buttons", len(update_buttons))
-    for elem in update_buttons:
-        sleep(1 + 2 * random())
-        elem.click()
-        logger.debug("click!")
-    # There is no easy reliable way to make sure all outstanding request are
-    # complete. So, just give it enough time.
-    sleep(POST_UPDATE_PAUSE)
+    update_button = browser.find_element_by_xpath(UPDATE_BUTTON_XPATH)
+    logger.info("Located update button")
+    sleep(1 + 2 * random())
+    update_button.click()
+    logger.debug("click!")
+    WebDriverWait(browser, timeout).until(
+        EC.staleness_of(update_button)
+    )
+    logger.debug("update button gone")
+    WebDriverWait(browser, timeout).until(
+        button_wait_condition
+    )
+    logger.debug("update button is back again")
     logger.info('Updated!')
 
 def login(browser, timeout):
     logger = logging.getLogger("LOGIN")
     browser.get(LOGIN_URL)
     WebDriverWait(browser, timeout).until(
-        EC.url_matches(POST_LOGIN_URL_PATTERN)
+        EC.url_to_be(POST_LOGIN_URL)
     )
     logger.info('Successfully logged in!')
 
