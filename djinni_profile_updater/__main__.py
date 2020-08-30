@@ -152,7 +152,7 @@ def parse_args():
         return fvalue
 
     parser = argparse.ArgumentParser(
-        description="Python script to update your CV",
+        description="Python script to update your Djinni profile",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-t", "--timeout",
                         help="webdriver wait timeout",
@@ -174,7 +174,7 @@ def parse_args():
     parser.add_argument("-d", "--data-dir",
                         default=os.path.join(os.path.expanduser("~"),
                                              '.config',
-                                             'rabotaua-cv-updater'),
+                                             'djinni-profile-updater'),
                         help="application datadir location",
                         metavar="FILE")
     return parser.parse_args()

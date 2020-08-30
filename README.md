@@ -1,7 +1,7 @@
-rabotaua-cv-updater
+djinni-profile-updater
 =============
 
-Python script to update your CV on https://rabota.ua/ every 30 minites.
+Python script to update your profile on https://djinni.co every day.
 
 ## Requirements 
 
@@ -13,14 +13,14 @@ Run within source directory:
 
 `pip3 install .`
 
-`rabotaua-cv-updater` executable command should become immediately available. Alternatively, you may invoke application with `python3 -m rabotaua_cv_updater ...` command
+`djinni-profile-updater` executable command should become immediately available. Alternatively, you may invoke application with `python3 -m djinni_profile_updater ...` command
 
 ## Set your account
 
 Run:
 
 ```
-rabotaua-cv-updater login
+djinni-profile-updater login
 ```
 
 Browser window will pop up, prompting user to login. Once login will be acknowledged by application, browser window will be closed.
@@ -30,15 +30,15 @@ Browser window will pop up, prompting user to login. Once login will be acknowle
 Run:
 
 ```
-rabotaua-cv-updater update
+djinni-profile-updater update
 ```
 
-Application will be running continously, updating all your CV's in random intervals about to 30 minutes. If application is being restarted, it will figure out next update from own records on last update.
+Application will be running continously, updating all your CV's in random intervals about 1 day. If application is being restarted, it will figure out next update from own records on last update.
 
 ## Datadir structure
 
 ```
-~/.config/rabotaua-cv-updater
+~/.config/djinni-profile-updater
 ├── updater.db # SQLite database with last update timestamp
 └── profile    # browser profile
 ```
@@ -51,8 +51,8 @@ Application will be running continously, updating all your CV's in random interv
 ## Synopsis
 
 ```
-$ rabotaua-cv-updater -h
-usage: rabotaua-cv-updater [-h] [-t TIMEOUT] [-b {chrome,chromium}]
+$ djinni-profile-updater -h
+usage: djinni-profile-updater [-h] [-t TIMEOUT] [-b {chrome,chromium}]
                      [-v {debug,info,warn,error,fatal}] [-d FILE]
                      {login,update}
 
@@ -71,5 +71,5 @@ optional arguments:
                         logging verbosity (default: info)
   -d FILE, --data-dir FILE
                         application datadir location (default:
-                        ~/.config/rabotaua-cv-updater)
+                        ~/.config/djinni-profile-updater)
 ```

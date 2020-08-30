@@ -6,13 +6,13 @@ this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-setup(name='rabotaua_cv_updater',
+setup(name='djinni_profile_updater',
       version='0.1.0',
-      description='Tool which updates your CV on rabota.ua',
+      description='Tool which updates your profile on djinni.co',
       url='https://github.com/danilasokolov0103/CV_updater',
       author='Danila Sokolov',
       author_email='danilasokolov0103@gmail.com',
-      packages=['rabotaua_cv_updater'],
+      packages=['djinni_profile_updater'],
       python_requires='>=3.5.3',
       setup_requires=[
           'wheel',
@@ -23,7 +23,7 @@ setup(name='rabotaua_cv_updater',
       ],
       entry_points={
           'console_scripts': [
-              'rabotaua-cv-updater=rabotaua_cv_updater.__main__:main',
+              'djinni-profile-updater=djinni_profile_updater.__main__:main',
           ],
       },
       classifiers=[
