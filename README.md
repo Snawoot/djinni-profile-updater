@@ -5,7 +5,7 @@ Python script to update your profile on https://djinni.co every day.
 
 ## Requirements 
 
-You need to have installed Chromium or Google Chrome browser.
+You need to have instelled Chromium or Google Chrome browser.
 
 ## Installation
 
@@ -25,7 +25,7 @@ djinni-profile-updater login
 
 Browser window will pop up, prompting user to login. After login, please respond to survey pop-up, if any will emerge. Otherwise it may disrupt automation. Once login will be acknowledged by application, browser window will be closed.
 
-## Update all resumes
+## Update profile
 
 Run:
 
