@@ -33,6 +33,7 @@ UPDATE_INTERVAL = 24 * 3600
 UPDATE_INTERVAL_MIN_DRIFT = -3600
 UPDATE_INTERVAL_MAX_DRIFT = 3600
 MANUAL_LOGIN_TIMEOUT = 3600
+POST_LOGIN_PAUSE = 10
 
 DB_INIT = [
     "CREATE TABLE IF NOT EXISTS update_ts (\n"
@@ -119,6 +120,9 @@ def login(browser, timeout):
     WebDriverWait(browser, timeout).until(
         EC.url_to_be(POST_LOGIN_URL)
     )
+    logger.warning("Login successful. Please allow %.2f seconds to complete "
+                   "login requests...", float(POST_LOGIN_PAUSE))
+    sleep(POST_LOGIN_PAUSE)
     logger.info('Successfully logged in!')
 
 def parse_args():
