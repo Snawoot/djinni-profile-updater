@@ -23,7 +23,7 @@ Run:
 djinni-profile-updater login
 ```
 
-Browser window will pop up, prompting user to login. Once login will be acknowledged by application, browser window will be closed.
+Browser window will pop up, prompting user to login. After login, please respond to survey pop-up, if any will emerge. Otherwise it may disrupt automation. Once login will be acknowledged by application, browser window will be closed.
 
 ## Update all resumes
 
